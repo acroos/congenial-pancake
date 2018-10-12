@@ -1,0 +1,23 @@
+{
+  "name": "base-template",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "keywords": [],
+  "author": "acroos",
+  "license": "MIT",
+  "dependencies": {
+    "bulma": "^0.7.1",
+    "react": "^16.5.2",
+    "react-dom": "^16.5.2"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "sass": "^1.14.1"
+  },
+  "scripts": {
+    "start": "parcel index.html"
+  }
+}
