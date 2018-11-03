@@ -3,6 +3,13 @@
 
 $goodgray: #444;
 
+$red1: rgba(229, 6, 0, 0.4);
+$red2: rgba(221, 84, 0, 0.4);
+$yellow1: rgba(213, 136, 0, 0.4);
+$yellow2: rgba(188, 206, 0, 0.4);
+$green1: rgba(110, 198, 0, 0.4);
+$green2: rgba(38, 191, 0, 0.4);
+
 html, body, div#app {
     width: 100%;
     height: 100%;
@@ -39,4 +46,28 @@ div#gameArea {
             line-height: 32px;
         }
     }
+}
+
+.letterDistance0 {
+    background-color: $green2;
+}
+
+.letterDistance1 {
+    background-color: $green1;
+}
+
+.letterDistance2 {
+    background-color: $yellow2;
+}
+
+.letterDistance3 {
+    background-color: $yellow1;
+}
+
+.letterDistance4 {
+    background-color: $red2;
+}
+
+.letterDistance5 {
+    background-color: $red1;
 }

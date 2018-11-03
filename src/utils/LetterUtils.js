@@ -11,5 +11,12 @@ export const xPositionForLetter = (letter) => {
     return alphabet.indexOf(letter) * letterSpacing;
 };
 
+export const maxHeight = (letters) => {
+    if (letters.length == 0) {
+        return 30;  // This is the height letters start at
+    }
+    return Math.max(...(letters.map((letter) => letter.height)));
+}
+
 
 export default { xPositionForLetter, randomLetter };

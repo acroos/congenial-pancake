@@ -1,7 +1,7 @@
 import React from "react";
 import Navbar from "./Navbar";
 import GameArea from "./GameArea";
-import { randomLetter } from "../utils/LetterUtils.js";
+import { randomLetter, maxHeight } from "../utils/LetterUtils.js";
 import GameOverModal from "./GameOverModal";
 import SettingsModal from "./SettingsModal";
 import HighScoresModal from "./HighScoresModal";
@@ -69,13 +69,10 @@ export default class GamePage extends React.Component {
         this.setState({ lettersOnBoard: currentLetters });
     }
 
-    checkForGameOver() {
-        for(let i=0; i<this.state.lettersOnBoard.length; i++) {
-            let letter = this.state.lettersOnBoard[i];
-            if(letter.height >= 780) {
-                this.setState({ isFinished: true });
-                this.stopInterval();
-            }
+    checkForGameOver() { 
+        if(maxHeight(this.state.lettersOnBoard) >= 780) {
+            this.setState({ isFinished: true });
+            this.stopInterval();
         }
     }
 
