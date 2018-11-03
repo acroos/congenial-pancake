@@ -64,7 +64,7 @@ export default class GamePage extends React.Component {
             return { value: letter.value, height: letter.height + 10 };
         });
         let newLetter = randomLetter();
-        currentLetters.push({ value: newLetter, height: 20 });
+        currentLetters.push({ value: newLetter, height: 30 });
 
         this.setState({ lettersOnBoard: currentLetters });
     }
