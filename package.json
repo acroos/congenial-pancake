@@ -1,11 +1,12 @@
 {
-  "name": "base-template",
+  "name": "congenial-pancake",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "keywords": [],
   "author": "acroos",
   "license": "MIT",
+  "homepage": "https://acroos.github.io/congenial-pancake",
   "dependencies": {
     "bulma": "^0.7.1",
     "dexie": "^2.0.4",
@@ -16,6 +17,7 @@
     "babel-core": "^6.26.3",
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
+    "gh-pages": "^2.0.1",
     "sass": "^1.14.1"
   },
   "scripts": {
