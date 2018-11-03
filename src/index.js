@@ -1,8 +1,14 @@
 import React from "react"
 import ReactDOM from "react-dom";
-import HomePage from "./components/HomePage";
+import GamePage from "./components/GamePage";
 import "./sass/main.scss";
 
 const app = document.getElementById("app");
 
-ReactDOM.render(<HomePage />, app);
+const storedDifficulty = localStorage.getItem("difficulty");
+let difficulty = parseInt(storedDifficulty);
+if (difficulty == NaN) {
+    difficulty = 2;
+}
+
+ReactDOM.render( <GamePage difficulty={difficulty} />, app);
