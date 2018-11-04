@@ -48,4 +48,4 @@ var n=arguments[3];function t(n){return(t="function"==typeof Symbol&&"symbol"==t
 },{}],"H99C":[function(require,module,exports) {
 "use strict";var e=a(require("react")),t=a(require("react-dom")),r=a(require("./components/GamePage"));function a(e){return e&&e.__esModule?e:{default:e}}require("./sass/main.scss");var u=document.getElementById("app"),c=localStorage.getItem("difficulty"),d=parseInt(c);NaN==d&&(d=2),t.default.render(e.default.createElement(r.default,{difficulty:d}),u);
 },{"react":"HdMw","react-dom":"X9zx","./components/GamePage":"xuwm","./sass/main.scss":"4O78"}]},{},["H99C"], null)
-//# sourceMappingURL=/congenial-pancake/src.92c2b2e5.map
+//# sourceMappingURL=/congenial-pancake/src.f3e6661e.map
