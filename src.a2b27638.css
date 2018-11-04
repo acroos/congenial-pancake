@@ -4860,7 +4860,6 @@ a.dropdown-item.is-active {
 }
 .message a:not(.button):not(.tag) {
   color: currentColor;
-  text-decoration: underline;
 }
 .message.is-small {
   font-size: 0.75rem;
@@ -8468,4 +8467,28 @@ div#gameArea svg text {
 div#gameArea svg .topRowLetter {
   font-weight: bold;
   line-height: 32px;
+}
+
+.letterDistance0 {
+  background-color: rgba(38, 191, 0, 0.4);
+}
+
+.letterDistance1 {
+  background-color: rgba(110, 198, 0, 0.4);
+}
+
+.letterDistance2 {
+  background-color: rgba(188, 206, 0, 0.4);
+}
+
+.letterDistance3 {
+  background-color: rgba(213, 136, 0, 0.4);
+}
+
+.letterDistance4 {
+  background-color: rgba(221, 84, 0, 0.4);
+}
+
+.letterDistance5 {
+  background-color: rgba(229, 6, 0, 0.4);
 }
