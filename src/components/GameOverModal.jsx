@@ -36,7 +36,7 @@ export default class GameOverModal extends React.Component {
                             </div>
                         </div>
                         <div className="control">
-                            <a href="/" className="button is-rounded">Play again</a>
+                            <a className="button is-rounded" onClick={this.props.onClose}>Play again</a>
                         </div>
                     </div>
                     </article>

@@ -97,7 +97,7 @@ export default class HighScoresModal extends React.Component {
                             {this.tabBar()}
                             {this.highScoresTable()}
                             <div className="control">
-                                <a href="#" className="button" onClick={this.props.onClose}>Close</a>
+                                <a className="button" onClick={this.props.onClose}>Close</a>
                             </div>
                         </div>
                     </article>

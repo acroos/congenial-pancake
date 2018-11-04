@@ -128,11 +128,13 @@ export default class GamePage extends React.Component {
             <Navbar
                 score={this.state.score}
                 onSettingsClick={this.showSettings.bind(this)}
-                onHighScoresClick={this.showHighScores.bind(this)} />
+                onHighScoresClick={this.showHighScores.bind(this)}
+                newGame={this.resetGame.bind(this)} />
             <GameOverModal
                 active={this.state.isFinished}
                 score={this.state.score}
-                onSaveHighScore={this.saveHighScore.bind(this)} />
+                onSaveHighScore={this.saveHighScore.bind(this)}
+                onClose={this.resetGame.bind(this)} />
             <SettingsModal
                 active={this.state.showSettings}
                 onClose={this.hideSettings.bind(this)}

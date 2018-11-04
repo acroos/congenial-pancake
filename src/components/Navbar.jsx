@@ -1,11 +1,13 @@
 import React from "react";
 
 const Navbar = (props) => {
+    const pancake = require("../img/pancake.png");
+
     return (
         <nav className="navbar" role="navigation" aria-label="main navigation">
             <div className="navbar-brand">
-                <a className="navbar-item" href="/">
-                    <img src={require("../img/pancake.png")}></img>
+                <a className="navbar-item" onClick={props.newGame}>
+                    <img src={pancake}></img>
                     <span className="navbar-item">Congenial Pancake</span>
                 </a>
 
@@ -20,9 +22,9 @@ const Navbar = (props) => {
                     <span className="navbar-item">Score: {props.score}</span>
                 </div>
                 <div className="navbar-end">
-                    <a className="navbar-item" href="/">New Game</a>
-                    <a className="navbar-item" href="#" onClick={props.onHighScoresClick}>High Scores</a>
-                    <a className="navbar-item" href="#" onClick={props.onSettingsClick}>Settings</a>
+                    <a className="navbar-item" onClick={props.newGame}>New Game</a>
+                    <a className="navbar-item" onClick={props.onHighScoresClick}>High Scores</a>
+                    <a className="navbar-item" onClick={props.onSettingsClick}>Settings</a>
                 </div>
             </div>
         </nav>

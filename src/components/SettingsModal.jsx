@@ -47,7 +47,7 @@ const SettingsModal = (props) => {
                         </div>
 
                         <div className="control">
-                            <a href="#" className="button" onClick={props.onClose}>Close</a>
+                            <a className="button" onClick={props.onClose}>Close</a>
                         </div>
                     </div>
                 </article>
