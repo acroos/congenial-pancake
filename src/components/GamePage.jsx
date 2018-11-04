@@ -5,7 +5,7 @@ import { randomLetter, maxHeight } from "../utils/LetterUtils.js";
 import GameOverModal from "./GameOverModal";
 import SettingsModal from "./SettingsModal";
 import HighScoresModal from "./HighScoresModal";
-import { saveScore, getScores } from "../utils/ScoreUtils";
+import { saveScore } from "../utils/ScoreUtils";
 
 export default class GamePage extends React.Component {
     constructor(props) {
@@ -17,8 +17,7 @@ export default class GamePage extends React.Component {
             isFinished: false,
             showSettings: false,
             showHighScores: false,
-            difficulty: props.difficulty,
-            highScores: []
+            difficulty: props.difficulty
         };
     }
 
@@ -77,7 +76,7 @@ export default class GamePage extends React.Component {
     }
 
     saveHighScore(name) {
-        saveScore(name, this.state.score);
+        saveScore(name, this.state.score, this.state.difficulty);
         this.resetGame();
     }
 
@@ -111,9 +110,7 @@ export default class GamePage extends React.Component {
     }
 
     showHighScores() {
-        getScores().then((scores) => {
-            this.setState({ highScores: scores, showHighScores: true });
-        });
+        this.setState({ showHighScores: true });
     }
 
     hideHighScores() {
@@ -144,7 +141,7 @@ export default class GamePage extends React.Component {
             <HighScoresModal
                 active={this.state.showHighScores}
                 onClose={this.hideHighScores.bind(this)}
-                highScores={this.state.highScores} />
+                difficulty={this.state.difficulty} />
             <GameArea 
                 onLetterPress={this.onLetterPress.bind(this)}
                 onPause={this.onPause.bind(this)}

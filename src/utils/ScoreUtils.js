@@ -1,14 +1,17 @@
 import db from "../db";
 
-export const saveScore = (name, score) => {
-    db.highScores.add({name: name, score: score});
+export const saveScore = (name, score, difficulty) => {
+    db.highScores.add({
+        name: name,
+        score: score,
+        difficulty: difficulty
+    });
 }
 
-export function getScores() {
+export function getScores(difficulty) {
     return db.highScores
-        .orderBy('score')
-        .reverse()
-        .limit(10)
+        .where('difficulty')
+        .equals(difficulty)
         .toArray();
 }
 
