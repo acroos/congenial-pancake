@@ -1,4 +1,16 @@
 import React from "react";
+import Constants from "../constants.js";
+
+const SettingsButton = (props, difficulty) => {
+    return (
+        <a className={`button ${difficulty.buttonClass}`}
+            onClick={() => props.onDifficultyChange(difficulty.value)}
+            disabled={props.difficulty == difficulty.value}
+            key={difficulty.value} >
+            {difficulty.name}
+        </a>
+    )
+};
 
 const SettingsModal = (props) => {
     return (
@@ -13,36 +25,7 @@ const SettingsModal = (props) => {
                         <div className="field">
                             <label className="label is-large">Difficulty:</label>
                             <div className="buttons">
-                                <a className="button is-light" 
-                                    href="#" 
-                                    onClick={() => props.onDifficultyChange(4)}
-                                    disabled={props.difficulty == 4}>
-                                    Too Easy
-                                </a>
-                                <a className="button is-success"
-                                    href="#"
-                                    onClick={() => props.onDifficultyChange(3)}
-                                    disabled={props.difficulty == 3}>
-                                    Easy
-                                </a>
-                                <a className="button is-warning"
-                                    href="#"
-                                    onClick={() => props.onDifficultyChange(2)}
-                                    disabled={props.difficulty == 2}>
-                                    Medium
-                                </a>
-                                <a className="button is-danger"
-                                    href="#"
-                                    onClick={() => props.onDifficultyChange(1)}
-                                    disabled={props.difficulty == 1}>
-                                    Hard
-                                </a>
-                                <a className="button is-dark"
-                                    href="#"
-                                    onClick={() => props.onDifficultyChange(0)}
-                                    disabled={props.difficulty == 0}>
-                                    Too Hard
-                                </a>
+                                {Constants.Difficulties.map((difficulty) => SettingsButton(props, difficulty))}
                             </div>
                         </div>
 

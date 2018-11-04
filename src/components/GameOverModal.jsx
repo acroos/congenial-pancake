@@ -1,4 +1,5 @@
 import React from "react";
+import Constants from "../constants.js";
 
 export default class GameOverModal extends React.Component {
     constructor(props) {
@@ -23,7 +24,7 @@ export default class GameOverModal extends React.Component {
                                     ref={(inputRef) => { this.inputRef = inputRef }}
                                     className="input is-rounded"
                                     type="text"
-                                    maxLength={50}
+                                    maxLength={Constants.MaxNameLength}
                                     placeholder="High Score Name"
                                     onSubmit={() => this.props.onSaveHighScore(this.inputRef.value)} />
                             </div>

@@ -6,6 +6,7 @@ import GameOverModal from "./GameOverModal";
 import SettingsModal from "./SettingsModal";
 import HighScoresModal from "./HighScoresModal";
 import { saveScore } from "../utils/ScoreUtils";
+import Constants from "../constants.js";
 
 export default class GamePage extends React.Component {
     constructor(props) {
@@ -39,11 +40,10 @@ export default class GamePage extends React.Component {
             return;
         }
 
-        const baseTime = 
-            80 * (2 ** this.state.difficulty);
+        const difficulty = Constants.Difficulties[this.state.difficulty]
 
         const intervalTime = 
-            baseTime - Math.min((baseTime - 20), this.state.score)
+            Math.max(Constants.MinInterval, difficulty.initialInterval - this.state.score);
 
         this.interval = setTimeout(() => {
             this.updateLetters();
@@ -60,16 +60,16 @@ export default class GamePage extends React.Component {
 
     updateLetters() {
         let currentLetters = this.state.lettersOnBoard.map((letter) => {
-            return { value: letter.value, height: letter.height + 10 };
+            return { value: letter.value, height: letter.height + Constants.StepHeight };
         });
         let newLetter = randomLetter();
-        currentLetters.push({ value: newLetter, height: 30 });
+        currentLetters.push({ value: newLetter, height: Constants.InitialHeight });
 
         this.setState({ lettersOnBoard: currentLetters });
     }
 
     checkForGameOver() { 
-        if(maxHeight(this.state.lettersOnBoard) >= 780) {
+        if(maxHeight(this.state.lettersOnBoard) >= Constants.GameOverHeight) {
             this.setState({ isFinished: true });
             this.stopInterval();
         }

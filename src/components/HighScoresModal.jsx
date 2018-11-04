@@ -1,5 +1,6 @@
 import React from "react";
 import { getScores } from "../utils/ScoreUtils.js";
+import Constants from "../constants.js";
 
 export default class HighScoresModal extends React.Component {
     constructor(props) {
@@ -52,7 +53,7 @@ export default class HighScoresModal extends React.Component {
         }
     }
 
-    tab(difficulty, name) {
+    tab(difficulty) {
         const classes = "tab" + (this.state.currentDifficultyTab == difficulty ? " is-active" : "");
         const onClick = () => {
             this.setState(
@@ -64,8 +65,9 @@ export default class HighScoresModal extends React.Component {
         return (
             <li
                 className={classes}
-                onClick={onClick}>
-                <a>{name}</a>
+                onClick={onClick}
+                key={difficulty} >
+                <a>{Constants.Difficulties[difficulty].name}</a>
             </li>
         )
     }
@@ -74,11 +76,9 @@ export default class HighScoresModal extends React.Component {
         return (
             <div className="tabs is-center">
                 <ul>
-                    {this.tab(0, "Too Easy")}
-                    {this.tab(1, "Easy")}
-                    {this.tab(2, "Medium")}
-                    {this.tab(3, "Hard")}
-                    {this.tab(4, "Too Hard")}
+                    {Constants.Difficulties.map((difficulty, index) => {
+                        return this.tab(index, difficulty.name);
+                    })}
                 </ul>
             </div>
         );
