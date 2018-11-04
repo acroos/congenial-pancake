@@ -22173,13 +22173,60 @@ var Navbar = function Navbar(props) {
 
 var _default = Navbar;
 exports.default = _default;
-},{"react":"node_modules/react/index.js","../img/pancake.png":"src/img/pancake.png"}],"src/utils/LetterUtils.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","../img/pancake.png":"src/img/pancake.png"}],"src/constants.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var Constants = {
+  InitialHeight: 30,
+  StepHeight: 10,
+  GameOverHeight: 780,
+  Difficulties: [{
+    name: "Too Easy",
+    initialInterval: 1000,
+    buttonClass: "is-light",
+    value: 0
+  }, {
+    name: "Easy",
+    initialInterval: 800,
+    buttonClass: "is-success",
+    value: 1
+  }, {
+    name: "Medium",
+    initialInterval: 600,
+    buttonClass: "is-warning",
+    value: 2
+  }, {
+    name: "Hard",
+    initialInterval: 400,
+    buttonClass: "is-danger",
+    value: 3
+  }, {
+    name: "Too Hard",
+    initialInterval: 200,
+    buttonClass: "is-dark",
+    value: 4
+  }],
+  MinInterval: 20,
+  MaxNameLength: 50,
+  LetterSpacing: 45.5
+};
+var _default = Constants;
+exports.default = _default;
+},{}],"src/utils/LetterUtils.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = exports.maxHeight = exports.xPositionForLetter = exports.randomLetter = void 0;
+
+var _constants = _interopRequireDefault(require("../constants"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
 
@@ -22199,15 +22246,14 @@ var randomLetter = function randomLetter() {
 exports.randomLetter = randomLetter;
 
 var xPositionForLetter = function xPositionForLetter(letter) {
-  var letterSpacing = 45.5;
-  return alphabet.indexOf(letter) * letterSpacing;
+  return alphabet.indexOf(letter) * _constants.default.LetterSpacing;
 };
 
 exports.xPositionForLetter = xPositionForLetter;
 
 var maxHeight = function maxHeight(letters) {
   if (letters.length == 0) {
-    return 30; // This is the height letters start at
+    return _constants.default.InitialHeight;
   }
 
   return Math.max.apply(Math, _toConsumableArray(letters.map(function (letter) {
@@ -22221,7 +22267,7 @@ var _default = {
   randomLetter: randomLetter
 };
 exports.default = _default;
-},{}],"src/components/LetterRow.jsx":[function(require,module,exports) {
+},{"../constants":"src/constants.js"}],"src/components/LetterRow.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -22233,15 +22279,16 @@ var _react = _interopRequireDefault(require("react"));
 
 var _LetterUtils = require("../utils/LetterUtils.js");
 
+var _constants = _interopRequireDefault(require("../constants.js"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var LetterRow = function LetterRow(props) {
+var LetterRow = function LetterRow() {
   var letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
-  var height = "30";
   return letters.map(function (letter) {
     return _react.default.createElement("text", {
       x: (0, _LetterUtils.xPositionForLetter)(letter),
-      y: height,
+      y: _constants.default.InitialHeight,
       key: letter,
       className: "topRowLetter"
     }, letter);
@@ -22250,7 +22297,7 @@ var LetterRow = function LetterRow(props) {
 
 var _default = LetterRow;
 exports.default = _default;
-},{"react":"node_modules/react/index.js","../utils/LetterUtils.js":"src/utils/LetterUtils.js"}],"src/components/FallingLetters.jsx":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","../utils/LetterUtils.js":"src/utils/LetterUtils.js","../constants.js":"src/constants.js"}],"src/components/FallingLetters.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -22293,11 +22340,13 @@ var _FallingLetters = _interopRequireDefault(require("./FallingLetters"));
 
 var _LetterUtils = require("../utils/LetterUtils.js");
 
+var _constants = _interopRequireDefault(require("../constants.js"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var GameCanvas = function GameCanvas(props) {
   var bottomLetterHeight = (0, _LetterUtils.maxHeight)(props.letters);
-  var classNumber = Math.floor((bottomLetterHeight - 30) / 125);
+  var classNumber = Math.floor((bottomLetterHeight - _constants.default.InitialHeight) / 125);
   return _react.default.createElement("svg", {
     className: "letterDistance".concat(classNumber)
   }, _react.default.createElement(_LetterRow.default, null), _react.default.createElement(_FallingLetters.default, {
@@ -22307,7 +22356,7 @@ var GameCanvas = function GameCanvas(props) {
 
 var _default = GameCanvas;
 exports.default = _default;
-},{"react":"node_modules/react/index.js","./LetterRow":"src/components/LetterRow.jsx","./FallingLetters":"src/components/FallingLetters.jsx","../utils/LetterUtils.js":"src/utils/LetterUtils.js"}],"src/components/GameArea.jsx":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","./LetterRow":"src/components/LetterRow.jsx","./FallingLetters":"src/components/FallingLetters.jsx","../utils/LetterUtils.js":"src/utils/LetterUtils.js","../constants.js":"src/constants.js"}],"src/components/GameArea.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -22348,6 +22397,8 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = void 0;
 
 var _react = _interopRequireDefault(require("react"));
+
+var _constants = _interopRequireDefault(require("../constants.js"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -22413,7 +22464,7 @@ function (_React$Component) {
         },
         className: "input is-rounded",
         type: "text",
-        maxLength: 50,
+        maxLength: _constants.default.MaxNameLength,
         placeholder: "High Score Name",
         onSubmit: function onSubmit() {
           return _this2.props.onSaveHighScore(_this2.inputRef.value);
@@ -22440,7 +22491,7 @@ function (_React$Component) {
 
 exports.default = GameOverModal;
 ;
-},{"react":"node_modules/react/index.js"}],"src/components/SettingsModal.jsx":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","../constants.js":"src/constants.js"}],"src/components/SettingsModal.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -22450,7 +22501,20 @@ exports.default = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
+var _constants = _interopRequireDefault(require("../constants.js"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var SettingsButton = function SettingsButton(props, difficulty) {
+  return _react.default.createElement("a", {
+    className: "button ".concat(difficulty.buttonClass),
+    onClick: function onClick() {
+      return props.onDifficultyChange(difficulty.value);
+    },
+    disabled: props.difficulty == difficulty.value,
+    key: difficulty.value
+  }, difficulty.name);
+};
 
 var SettingsModal = function SettingsModal(props) {
   return _react.default.createElement("div", {
@@ -22471,42 +22535,9 @@ var SettingsModal = function SettingsModal(props) {
     className: "label is-large"
   }, "Difficulty:"), _react.default.createElement("div", {
     className: "buttons"
-  }, _react.default.createElement("a", {
-    className: "button is-light",
-    href: "#",
-    onClick: function onClick() {
-      return props.onDifficultyChange(4);
-    },
-    disabled: props.difficulty == 4
-  }, "Too Easy"), _react.default.createElement("a", {
-    className: "button is-success",
-    href: "#",
-    onClick: function onClick() {
-      return props.onDifficultyChange(3);
-    },
-    disabled: props.difficulty == 3
-  }, "Easy"), _react.default.createElement("a", {
-    className: "button is-warning",
-    href: "#",
-    onClick: function onClick() {
-      return props.onDifficultyChange(2);
-    },
-    disabled: props.difficulty == 2
-  }, "Medium"), _react.default.createElement("a", {
-    className: "button is-danger",
-    href: "#",
-    onClick: function onClick() {
-      return props.onDifficultyChange(1);
-    },
-    disabled: props.difficulty == 1
-  }, "Hard"), _react.default.createElement("a", {
-    className: "button is-dark",
-    href: "#",
-    onClick: function onClick() {
-      return props.onDifficultyChange(0);
-    },
-    disabled: props.difficulty == 0
-  }, "Too Hard"))), _react.default.createElement("div", {
+  }, _constants.default.Difficulties.map(function (difficulty) {
+    return SettingsButton(props, difficulty);
+  }))), _react.default.createElement("div", {
     className: "control"
   }, _react.default.createElement("a", {
     className: "button",
@@ -22516,7 +22547,7 @@ var SettingsModal = function SettingsModal(props) {
 
 var _default = SettingsModal;
 exports.default = _default;
-},{"react":"node_modules/react/index.js"}],"node_modules/dexie/dist/dexie.es.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","../constants.js":"src/constants.js"}],"node_modules/dexie/dist/dexie.es.js":[function(require,module,exports) {
 var global = arguments[3];
 "use strict";
 
@@ -27532,6 +27563,8 @@ var _react = _interopRequireDefault(require("react"));
 
 var _ScoreUtils = require("../utils/ScoreUtils.js");
 
+var _constants = _interopRequireDefault(require("../constants.js"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -27610,7 +27643,7 @@ function (_React$Component) {
     }
   }, {
     key: "tab",
-    value: function tab(difficulty, name) {
+    value: function tab(difficulty) {
       var _this3 = this;
 
       var classes = "tab" + (this.state.currentDifficultyTab == difficulty ? " is-active" : "");
@@ -27625,15 +27658,20 @@ function (_React$Component) {
 
       return _react.default.createElement("li", {
         className: classes,
-        onClick: onClick
-      }, _react.default.createElement("a", null, name));
+        onClick: onClick,
+        key: difficulty
+      }, _react.default.createElement("a", null, _constants.default.Difficulties[difficulty].name));
     }
   }, {
     key: "tabBar",
     value: function tabBar() {
+      var _this4 = this;
+
       return _react.default.createElement("div", {
         className: "tabs is-center"
-      }, _react.default.createElement("ul", null, this.tab(0, "Too Easy"), this.tab(1, "Easy"), this.tab(2, "Medium"), this.tab(3, "Hard"), this.tab(4, "Too Hard")));
+      }, _react.default.createElement("ul", null, _constants.default.Difficulties.map(function (difficulty, index) {
+        return _this4.tab(index, difficulty.name);
+      })));
     }
   }, {
     key: "render",
@@ -27663,7 +27701,7 @@ function (_React$Component) {
 }(_react.default.Component);
 
 exports.default = HighScoresModal;
-},{"react":"node_modules/react/index.js","../utils/ScoreUtils.js":"src/utils/ScoreUtils.js"}],"src/components/GamePage.jsx":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","../utils/ScoreUtils.js":"src/utils/ScoreUtils.js","../constants.js":"src/constants.js"}],"src/components/GamePage.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -27686,6 +27724,8 @@ var _SettingsModal = _interopRequireDefault(require("./SettingsModal"));
 var _HighScoresModal = _interopRequireDefault(require("./HighScoresModal"));
 
 var _ScoreUtils = require("../utils/ScoreUtils");
+
+var _constants = _interopRequireDefault(require("../constants.js"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -27754,8 +27794,8 @@ function (_React$Component) {
         return;
       }
 
-      var baseTime = 80 * Math.pow(2, this.state.difficulty);
-      var intervalTime = baseTime - Math.min(baseTime - 20, this.state.score);
+      var difficulty = _constants.default.Difficulties[this.state.difficulty];
+      var intervalTime = Math.max(_constants.default.MinInterval, difficulty.initialInterval - this.state.score);
       this.interval = setTimeout(function () {
         _this2.updateLetters();
 
@@ -27777,13 +27817,13 @@ function (_React$Component) {
       var currentLetters = this.state.lettersOnBoard.map(function (letter) {
         return {
           value: letter.value,
-          height: letter.height + 10
+          height: letter.height + _constants.default.StepHeight
         };
       });
       var newLetter = (0, _LetterUtils.randomLetter)();
       currentLetters.push({
         value: newLetter,
-        height: 30
+        height: _constants.default.InitialHeight
       });
       this.setState({
         lettersOnBoard: currentLetters
@@ -27792,7 +27832,7 @@ function (_React$Component) {
   }, {
     key: "checkForGameOver",
     value: function checkForGameOver() {
-      if ((0, _LetterUtils.maxHeight)(this.state.lettersOnBoard) >= 780) {
+      if ((0, _LetterUtils.maxHeight)(this.state.lettersOnBoard) >= _constants.default.GameOverHeight) {
         this.setState({
           isFinished: true
         });
@@ -27911,7 +27951,7 @@ function (_React$Component) {
 }(_react.default.Component);
 
 exports.default = GamePage;
-},{"react":"node_modules/react/index.js","./Navbar":"src/components/Navbar.jsx","./GameArea":"src/components/GameArea.jsx","../utils/LetterUtils.js":"src/utils/LetterUtils.js","./GameOverModal":"src/components/GameOverModal.jsx","./SettingsModal":"src/components/SettingsModal.jsx","./HighScoresModal":"src/components/HighScoresModal.jsx","../utils/ScoreUtils":"src/utils/ScoreUtils.js"}],"../../../.config/yarn/global/node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","./Navbar":"src/components/Navbar.jsx","./GameArea":"src/components/GameArea.jsx","../utils/LetterUtils.js":"src/utils/LetterUtils.js","./GameOverModal":"src/components/GameOverModal.jsx","./SettingsModal":"src/components/SettingsModal.jsx","./HighScoresModal":"src/components/HighScoresModal.jsx","../utils/ScoreUtils":"src/utils/ScoreUtils.js","../constants.js":"src/constants.js"}],"../../../.config/yarn/global/node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
 var bundleURL = null;
 
 function getBundleURLCached() {
@@ -28034,7 +28074,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "38395" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "42453" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
